@@ -1,12 +1,11 @@
 import React from 'react'
-import { AppBar, Toolbar, Input, Typography, Container, Avatar, Box } from '@material-ui/core'
+import { AppBar, Toolbar, Input, Typography, Container, Avatar } from '@material-ui/core'
 import { SearchOutlined, MessageOutlined, NotificationsNoneOutlined, HelpOutlineOutlined, AppsOutlined } from '@material-ui/icons';
 
 
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import logo from 'assets/images/icon-minecraft.png'
 
-const { Search } = Input;
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer
@@ -45,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
     },
   }
 }))
-
-const onSearch = value => console.log(value);
 
 export default function Header() {
   const classes  = useStyles()
