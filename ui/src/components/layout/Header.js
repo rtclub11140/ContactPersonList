@@ -1,12 +1,12 @@
 import React from 'react'
-import { AppBar, Toolbar, Input, Typography, Container, Avatar } from '@material-ui/core'
+import { AppBar, Toolbar, Input, Typography, Container, Avatar, Box } from '@material-ui/core'
 import { SearchOutlined, MessageOutlined, NotificationsNoneOutlined, HelpOutlineOutlined, AppsOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles'
 import logo from 'assets/images/icon-minecraft.png'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    zIndex: theme.zIndex.drawer
+    zIndex: theme.zIndex.drawer,
   },
   logoImage: {
     width: 50,
@@ -46,7 +46,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes  = useStyles()
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar
+      position="fixed"
+      className={classes.appBar}      
+    >
       <Toolbar>
         <img src={logo} alt="Company's name" className={classes.logoImage} />
         <Container>
@@ -82,5 +85,6 @@ export default function Header() {
         </div>     
       </Toolbar>
     </AppBar>
+    
   )
 }

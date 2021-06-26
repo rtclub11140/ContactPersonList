@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Typography } from '@material-ui/core'
 
-export default function Content() {
+export default function Footer() {
    return (
     <>
       <Box display="flex" justifyContent="center" >
