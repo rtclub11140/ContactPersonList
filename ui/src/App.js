@@ -1,22 +1,15 @@
-import Layout from 'modules/ui/components/Layout'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import Layout from 'pages/Layout'
+import { ThemeProvider } from '@material-ui/core/styles'
 import 'antd/dist/antd.css';
+import theme from 'theme/index';
 
 function App() {
-    const theme = createMuiTheme({
-      palette: {
-      // type: 
-      primary: {
-        main : '#FFFFFF'
-      }
-    }
-  })
+    
   return (
     <>
       <ThemeProvider theme={theme}>
-       <Layout></Layout>
-      </ThemeProvider>
-     
+        <Layout />
+      </ThemeProvider>     
     </>
   )
 }

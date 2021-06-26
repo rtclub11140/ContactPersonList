@@ -1,8 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, Input, Typography, Container, Avatar } from '@material-ui/core'
 import { SearchOutlined, MessageOutlined, NotificationsNoneOutlined, HelpOutlineOutlined, AppsOutlined } from '@material-ui/icons';
-
-
 import { makeStyles } from '@material-ui/core/styles'
 import logo from 'assets/images/icon-minecraft.png'
 
@@ -80,7 +78,7 @@ export default function Header() {
           <AppsOutlined />
         </div>
         <div className={classes.subMenu}>
-          <Avatar alt="Remy Sharp" src="/assets/images/icon-avatar.jpg" className={classes.avatar} />
+          <Avatar alt="Remy Sharp" src="assets/images/icon-avatar.jpg" className={classes.avatar} />
         </div>     
       </Toolbar>
     </AppBar>
