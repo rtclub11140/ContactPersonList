@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Table,
   TableBody,
@@ -10,69 +10,58 @@ import {
   Paper,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import dayjs from 'dayjs'
+import axios from 'axios'
+
+const useStyles = makeStyles({
+  root: {
+    width: '95vw',
+  },
+  container: {
+    //maxHeight: 440,
+    height: '100vh',
+  },
+})
 
 export default function TableContact() {
-  const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-    {
-      id: 'population',
-      label: 'Population',
-      minWidth: 170,
-      align: 'right',
-      format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-      id: 'size',
-      label: 'Size\u00a0(km\u00b2)',
-      minWidth: 170,
-      align: 'right',
-      format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-      id: 'density',
-      label: 'Density',
-      minWidth: 170,
-      align: 'right',
-      format: (value) => value.toFixed(2),
-    },
-  ]
-
-  const createData = (name, code, population, size) => {
-    const density = population / size
-    return { name, code, population, size, density }
-  }
-
-  const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
-  ]
-
-  const useStyles = makeStyles({
-    root: {
-      width: '100%',
-    },
-    container: {
-      maxHeight: 440,
-    },
-  })
-
-  const classes = useStyles()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [contact, setContact] = useState([])
+  const classes = useStyles()
+
+  useEffect(() => {
+    const loadContract = async () => {
+      const { data } = await axios.get('json/mock_data.json')
+      setContact(data)
+    }
+    loadContract()
+  }, [])
+
+  const columns = [
+    { id: 'name_surname', label: 'ผู้ติดต่อ', minWidth: 170, align: 'center' },
+    { id: 'mobile_number', label: 'เบอร์โทรศัพท์มือถือ', minWidth: 170 },
+    { id: 'company', label: 'บริษัท', minWidth: 170 },
+    {
+      id: 'add_date',
+      label: 'ติดต่อล่าสุด',
+      minWidth: 170,
+      format: (value) => dayjs(value).format('DD/MM/YYYY'),
+      align: 'center',
+    },
+    {
+      id: 'edit_date',
+      label: 'Edit Date',
+      minWidth: 170,
+      format: (value) => dayjs(value).format('DD/MM/YYYY'),
+      align: 'center',
+    },
+    { id: 'email', label: 'Email', minWidth: 170 },
+    { id: 'industrial', label: 'Industrial', minWidth: 170 },
+    { id: 'status', label: 'Status', minWidth: 170 },
+    { id: 'website', label: 'Website', minWidth: 170 },
+    { id: 'activity', label: 'Activity', minWidth: 170 },
+    { id: 'telephone', label: 'Telephone', minWidth: 170 },
+  ]
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -101,7 +90,7 @@ export default function TableContact() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {contact
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -125,7 +114,7 @@ export default function TableContact() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={contact.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

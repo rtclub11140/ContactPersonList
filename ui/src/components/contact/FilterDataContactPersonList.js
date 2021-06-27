@@ -20,7 +20,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '95vw',
   },
   iconPin: {
     marginTop: 5,
