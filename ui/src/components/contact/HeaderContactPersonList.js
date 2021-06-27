@@ -1,17 +1,17 @@
 import React from 'react'
 import { Button, Box, Typography } from '@material-ui/core'
-import { ArrowDropDownCircleOutlined, Add, Settings } from '@material-ui/icons';
+import { ArrowDropDownCircleOutlined, Add, Settings } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%'
+    width: '100%',
   },
   iconCircle: {
     marginTop: 5,
     marginLeft: 10,
-     cursor: 'pointer',
+    cursor: 'pointer',
     '&:hover': {
-       color: "#ff4081",
+      color: '#ff4081',
     },
   },
   iconSetting: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     backgroundColor: 'transparent',
     '&:hover': {
-       color: "#ff4081",
+      color: '#ff4081',
     },
   },
   button: {
@@ -28,18 +28,24 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function HeaderContactPersonList() {
-  const classes  = useStyles()
+  const classes = useStyles()
   return (
-     <div className={classes.root}>
+    <div className={classes.root}>
       <Box display="flex">
         <Box>
-          <Typography variant="h5" >Contact Person List</Typography>
+          <Typography variant="h5">Contact Person List</Typography>
         </Box>
         <Box flexGrow={1}>
-          <div className={classes.iconCircle}><ArrowDropDownCircleOutlined /></div>
+          <div className={classes.iconCircle}>
+            <ArrowDropDownCircleOutlined />
+          </div>
         </Box>
         <Box>
-          <Button variant="outlined" startIcon={<Add />} className={classes.button}>
+          <Button
+            variant="outlined"
+            startIcon={<Add />}
+            className={classes.button}
+          >
             Add Contact Person
           </Button>
         </Box>
@@ -49,8 +55,10 @@ export default function HeaderContactPersonList() {
           </Button>
         </Box>
         <Box>
-          <div className={classes.iconSetting}><Settings/></div> 
-        </Box>                   
+          <div className={classes.iconSetting}>
+            <Settings />
+          </div>
+        </Box>
       </Box>
     </div>
   )

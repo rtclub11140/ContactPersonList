@@ -8,22 +8,22 @@ import { Container } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection:"row",
+    flexDirection: 'row',
     height: '100%',
     overflow: 'hidden',
-    width: '100%'
+    width: '100%',
   },
 }))
 
 export default function Layout() {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       <CssBaseline></CssBaseline>
-      <Container  maxWidth="lg" className={classes.root}>
-        <Header></Header>        
+      <Container maxWidth="lg" className={classes.root}>
+        <Header></Header>
         <Content></Content>
-      </Container>      
+      </Container>
     </>
   )
 }

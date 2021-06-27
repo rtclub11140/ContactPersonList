@@ -1,6 +1,19 @@
 import React from 'react'
-import { AppBar, Toolbar, Input, Typography, Container, Avatar } from '@material-ui/core'
-import { SearchOutlined, MessageOutlined, NotificationsNoneOutlined, HelpOutlineOutlined, AppsOutlined } from '@material-ui/icons';
+import {
+  AppBar,
+  Toolbar,
+  Input,
+  Typography,
+  Container,
+  Avatar,
+} from '@material-ui/core'
+import {
+  SearchOutlined,
+  MessageOutlined,
+  NotificationsNoneOutlined,
+  HelpOutlineOutlined,
+  AppsOutlined,
+} from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import logo from 'assets/images/icon-minecraft.png'
 
@@ -10,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
   logoImage: {
     width: 50,
-    height:50
+    height: 50,
   },
   spacer: {
-    flexGrow:1
+    flexGrow: 1,
   },
   input: {
     margin: theme.spacing.unit,
@@ -26,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   vl: {
     borderLeft: '2px solid #85929E',
     marginLeft: 10,
-    height: 30
+    height: 30,
   },
   avatar: {
     margin: 5,
@@ -38,28 +51,25 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     cursor: 'pointer',
     '&:hover': {
-       color: "#ff4081",
+      color: '#ff4081',
     },
-  }
+  },
 }))
 
 export default function Header() {
-  const classes  = useStyles()
+  const classes = useStyles()
   return (
-    <AppBar
-      position="fixed"
-      className={classes.appBar}      
-    >
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <img src={logo} alt="Company's name" className={classes.logoImage} />
         <Container>
-          <Typography variant="subtitle2" >Conpany's name</Typography>
+          <Typography variant="subtitle2">Conpany's name</Typography>
           <Typography variant="caption">Siogan of the company</Typography>
         </Container>
         <div className={classes.spacer}></div>
         <div className={classes.subMenu}>
           <SearchOutlined />
-        </div>        
+        </div>
         <Input
           placeholder="Search"
           className={classes.input}
@@ -72,7 +82,7 @@ export default function Header() {
           <MessageOutlined />
         </div>
         <div className={classes.subMenu}>
-           <NotificationsNoneOutlined />
+          <NotificationsNoneOutlined />
         </div>
         <div className={classes.subMenu}>
           <HelpOutlineOutlined />
@@ -81,10 +91,13 @@ export default function Header() {
           <AppsOutlined />
         </div>
         <div className={classes.subMenu}>
-          <Avatar alt="Remy Sharp" src="assets/images/icon-avatar.jpg" className={classes.avatar} />
-        </div>     
+          <Avatar
+            alt="Remy Sharp"
+            src="assets/images/icon-avatar.jpg"
+            className={classes.avatar}
+          />
+        </div>
       </Toolbar>
     </AppBar>
-    
   )
 }

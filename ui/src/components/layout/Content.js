@@ -1,29 +1,44 @@
-import React, {useState } from "react"
-import { Toolbar, Drawer, Box, Typography, CssBaseline,  IconButton, Divider, List } from '@material-ui/core'
-import { DashboardOutlined, RecentActorsOutlined, BrokenImageOutlined, SettingsOutlined, LensOutlined, ChevronLeft, ChevronRight } from '@material-ui/icons';
+import React, { useState } from 'react'
+import {
+  Toolbar,
+  Drawer,
+  Box,
+  Typography,
+  CssBaseline,
+  IconButton,
+  Divider,
+  List,
+} from '@material-ui/core'
+import {
+  DashboardOutlined,
+  RecentActorsOutlined,
+  BrokenImageOutlined,
+  SettingsOutlined,
+  LensOutlined,
+  ChevronLeft,
+  ChevronRight,
+} from '@material-ui/icons'
 import { makeStyles, useTheme, styled } from '@material-ui/core/styles'
-import MuiAppBar from '@material-ui/core/AppBar';
-import MenuIcon from '@material-ui/icons/Menu';
+import MuiAppBar from '@material-ui/core/AppBar'
+import MenuIcon from '@material-ui/icons/Menu'
 import Footer from './Footer.js'
 import NavItem from './NavItem.js'
 import HeaderContactPersonList from '../contact/HeaderContactPersonList.js'
 import FilterDataContactPersonList from '../contact/FilterDataContactPersonList.js'
 
+const drawerWidth = 240
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({ 
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    width: '100%'
+    width: '100%',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginTop: 64
-    
+    marginTop: 64,
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -32,23 +47,23 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginTop:64
+    marginTop: 64,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   hide: {
     display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,
     marginTop: 64,
     backgroundColor: '#171C2D',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   },
   drawerHeader: {
     display: 'flex',
@@ -56,19 +71,19 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',     
+    justifyContent: 'flex-end',
   },
 
-   spacer: {
-    flexGrow:1
+  spacer: {
+    flexGrow: 1,
   },
   titleHeaderMenu: {
     color: '#FFFFFF',
-    marginLeft: 10
+    marginLeft: 10,
   },
   textWhite: {
-      color: '#FFFFFF'
-   }
+    color: '#FFFFFF',
+  },
 }))
 
 const AppBar = styled(MuiAppBar, {
@@ -86,8 +101,8 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-  marginTop: 64
-}));
+  marginTop: 64,
+}))
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -97,7 +112,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: '-270px',//`-${drawerWidth}px`,
+    marginLeft: '-270px', //`-${drawerWidth}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -106,8 +121,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       //marginLeft: 0,
       marginLeft: '-30px',
     }),
-  }),
-);
+  })
+)
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -115,76 +130,73 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-}));
-
+}))
 
 const items = [
   {
-    number:1,
+    number: 1,
     href: '/app/dashboard',
     icon: DashboardOutlined,
-    title: 'Dashboard'
+    title: 'Dashboard',
   },
   {
     number: 2,
     href: '/app/contactpersonList',
     icon: RecentActorsOutlined,
-    title: 'Contact Person List'
+    title: 'Contact Person List',
   },
   {
     number: 3,
     href: '/app/report',
     icon: BrokenImageOutlined,
-    title: 'Report'
-  },  
+    title: 'Report',
+  },
   {
     number: 4,
     href: '/app/setting',
     icon: SettingsOutlined,
-    title: 'Setting' ,
+    title: 'Setting',
     submenu: [
       {
         number: 41,
         href: '/app/submenu/managelayout',
         icon: LensOutlined,
-        title: 'Manage Layout'
+        title: 'Manage Layout',
       },
       {
         number: 42,
         href: '/app/submenu/member',
         icon: LensOutlined,
-        title: 'Member'
+        title: 'Member',
       },
       {
         number: 43,
         href: '/app/submenu/dataaccess',
         icon: LensOutlined,
-        title: 'Data Access'
+        title: 'Data Access',
       },
       {
         number: 44,
         href: '/app/submenu/systemlog',
         icon: LensOutlined,
-        title: 'System Log'
-      }
-    ]
-  }   
+        title: 'System Log',
+      },
+    ],
+  },
 ]
 
-
-
 export default function Content() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div className={classes.root}>
@@ -199,10 +211,10 @@ export default function Content() {
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
             <MenuIcon />
-          </IconButton>          
-            <HeaderContactPersonList/>          
+          </IconButton>
+          <HeaderContactPersonList />
         </Toolbar>
-      </AppBar>     
+      </AppBar>
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -211,13 +223,13 @@ export default function Content() {
         classes={{
           paper: classes.drawerPaper,
         }}
-      >        
+      >
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap className={classes.titleHeaderMenu}>
             Contact
           </Typography>
           <div className={classes.spacer}></div>
-          <IconButton onClick={handleDrawerClose} className={ classes.textWhite}>
+          <IconButton onClick={handleDrawerClose} className={classes.textWhite}>
             {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>
         </div>
@@ -231,17 +243,17 @@ export default function Content() {
                 title={item.title}
                 icon={item.icon}
                 item={item}
-              />             
+              />
             ))}
           </List>
-        </Box>        
+        </Box>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
         <DrawerHeader />
         <FilterDataContactPersonList />
-        <Footer />          
-      </Main>  
-    </div>    
+        <Footer />
+      </Main>
+    </div>
   )
 }
