@@ -1,14 +1,8 @@
 import React, { useState} from 'react'
-import {
-  NavLink as RouterLink,
-  matchPath,
-  useLocation
-} from 'react-router-dom';
-
-import { Button, List, ListItemIcon, ListItemText, Collapse } from '@material-ui/core';
+import { List, ListItemText, Collapse } from '@material-ui/core';
 import MuiListItem from "@material-ui/core/ListItem";
 import {ExpandLess, ExpandMore} from '@material-ui/icons'
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   nested: {

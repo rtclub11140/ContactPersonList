@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Toolbar, Input, Typography, Container, Avatar, Box } from '@material-ui/core'
+import { AppBar, Toolbar, Input, Typography, Container, Avatar } from '@material-ui/core'
 import { SearchOutlined, MessageOutlined, NotificationsNoneOutlined, HelpOutlineOutlined, AppsOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles'
 import logo from 'assets/images/icon-minecraft.png'

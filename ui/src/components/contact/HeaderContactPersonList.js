@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Box, Typography } from '@material-ui/core'
 import { ArrowDropDownCircleOutlined, Add, Settings } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles'
@@ -33,7 +33,7 @@ export default function HeaderContactPersonList() {
      <div className={classes.root}>
       <Box display="flex">
         <Box>
-          <Typography variant="h6" >Contact Person List</Typography>
+          <Typography variant="h5" >Contact Person List</Typography>
         </Box>
         <Box flexGrow={1}>
           <div className={classes.iconCircle}><ArrowDropDownCircleOutlined /></div>

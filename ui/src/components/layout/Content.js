@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react"
-import clsx from 'clsx'
-import { Container, Toolbar, Drawer, Box, Typography, CssBaseline, AppBar, IconButton, Divider, List } from '@material-ui/core'
-import { DashboardOutlined, RecentActorsOutlined, BrokenImageOutlined, SettingsOutlined, LensOutlined, ChevronLeft, ChevronRight, Menu } from '@material-ui/icons';
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import React, {useState } from "react"
+import { Toolbar, Drawer, Box, Typography, CssBaseline,  IconButton, Divider, List } from '@material-ui/core'
+import { DashboardOutlined, RecentActorsOutlined, BrokenImageOutlined, SettingsOutlined, LensOutlined, ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { makeStyles, useTheme, styled } from '@material-ui/core/styles'
+import MuiAppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
 import Footer from './Footer.js'
 import NavItem from './NavItem.js'
 import HeaderContactPersonList from '../contact/HeaderContactPersonList.js'
+import FilterDataContactPersonList from '../contact/FilterDataContactPersonList.js'
+
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({ 
   root: {
-    display: 'flex'
+    display: 'flex',
+    width: '100%'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -52,25 +56,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-     
+    justifyContent: 'flex-end',     
   },
-   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-   contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
+
    spacer: {
     flexGrow:1
   },
@@ -83,6 +71,51 @@ const useStyles = makeStyles((theme) => ({
    }
 }))
 
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+  marginTop: 64
+}));
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: '-270px',//`-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      //marginLeft: 0,
+      marginLeft: '-30px',
+    }),
+  }),
+);
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
 
 
 const items = [
@@ -139,6 +172,7 @@ const items = [
 ]
 
 
+
 export default function Content() {
   const classes = useStyles();
   const theme = useTheme();
@@ -155,25 +189,20 @@ export default function Content() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        elevation={0}
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" open={open} elevation={0}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <Menu />           
-          </IconButton>
-         <HeaderContactPersonList/>
+            <MenuIcon />
+          </IconButton>          
+            <HeaderContactPersonList/>          
         </Toolbar>
-      </AppBar>
+      </AppBar>     
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -206,19 +235,13 @@ export default function Content() {
             ))}
           </List>
         </Box>        
-      </Drawer>       
-     
-      {/*
-      <main className={classes.content}>
-      <Toolbar></Toolbar>
-      <Container maxWidth="lg">
-        
-      </Container>  
-      <Footer></Footer>
-    </main>
-      */}
-    
-    </div>
-    
+      </Drawer>
+      <Main open={open}>
+        <DrawerHeader />
+        <DrawerHeader />
+        <FilterDataContactPersonList />
+        <Footer />          
+      </Main>  
+    </div>    
   )
 }
