@@ -25,6 +25,7 @@ import Footer from './Footer.js'
 import NavItem from './NavItem.js'
 import HeaderContactPersonList from '../contact/HeaderContactPersonList.js'
 import FilterDataContactPersonList from '../contact/FilterDataContactPersonList.js'
+import TableContact from '../contact/TableContact.js'
 
 const drawerWidth = 240
 
@@ -252,6 +253,7 @@ export default function Content() {
         <DrawerHeader />
         <DrawerHeader />
         <FilterDataContactPersonList />
+        <TableContact />
         <Footer />
       </Main>
     </div>
