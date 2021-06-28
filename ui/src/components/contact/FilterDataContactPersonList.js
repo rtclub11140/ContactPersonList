@@ -10,13 +10,15 @@ import {
   Divider,
 } from '@material-ui/core'
 import {
-  RoomOutlined,
+  LocalBar,
   VideoLabelOutlined,
   FilterListOutlined,
   DeleteOutlined,
-  EditLocationOutlined,
+  Edit,
 } from '@material-ui/icons'
+
 import { makeStyles, withStyles } from '@material-ui/core/styles'
+import ModalSelectTheFields from './ModalSelectTheFields.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,16 +65,31 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem)
 
-export default function FilterDataContactPersonList() {
-  const classes = useStyles()
+ const initialColumn = ['name_surname', 'mobile_number', 'company', 'add_date', 'edit_date', 'email', 'industrial', 'status', 'website', 'activity', 'telephone']
+
+export default function FilterDataContactPersonList() {  
   const [anchorEl, setAnchorEl] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [selectedValue, setSelectedValue] = React.useState(initialColumn);
+  const classes = useStyles()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null)
+  }
+
+  const handleClickOpenModalSelectTheFields = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModalSelectTheFields = (value) => {
+   // value มาจาก modal
+    console.log('handleCloseModalSelectTheFields value : ', value);
+    setOpen(false)
+    setSelectedValue(value)
   }
 
   return (
@@ -88,7 +105,7 @@ export default function FilterDataContactPersonList() {
         </Box>
         <Box>
           <div className={classes.iconPin}>
-            <RoomOutlined />
+            <LocalBar />
           </div>
         </Box>
         <Box ml={2}>
@@ -99,16 +116,16 @@ export default function FilterDataContactPersonList() {
             color="primary"
             onClick={handleClick}
           >
-            <EditLocationOutlined />
-          </Button>
+            <Edit />
+          </Button>          
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
-            onClose={handleClose}
+            onClose={handleCloseMenu}
           >
-            <StyledMenuItem>
+            <StyledMenuItem onClick={(event) => handleClickOpenModalSelectTheFields(event)}>
               <ListItemIcon>
                 <VideoLabelOutlined fontSize="small" />
               </ListItemIcon>
@@ -130,6 +147,7 @@ export default function FilterDataContactPersonList() {
           </StyledMenu>
         </Box>
       </Box>
+      <ModalSelectTheFields selectedValue={selectedValue} open={open} onClose={handleCloseModalSelectTheFields} />
     </div>
   )
 }

@@ -45,7 +45,11 @@ export default function TableContact() {
       id: 'add_date',
       label: 'ติดต่อล่าสุด',
       minWidth: 170,
-      format: (value) => dayjs(value).format('DD/MM/YYYY'),
+      format: (value) => {
+        console.log('value : ', value)
+        console.log('rrrrr : ', dayjs(value).format('DD/MM/YYYY'))
+        return dayjs(value).format('DD/MM/YYYY')
+      },
       align: 'center',
     },
     {
