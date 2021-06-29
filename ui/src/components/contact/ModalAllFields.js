@@ -78,15 +78,19 @@ const initialColumn = [
 
 export default function ModalAllFields(props) {
   const { onClose, open } = props
-  const [listColumn, setListColumn] = useState(initialColumn)
+  const [fieldColumn, setFieldColumn] = useState('name_surname')
 
   const handleClose = () => {
-    onClose()
+    onClose({ selectedValue: [] })
   }
 
   const handleListItemClick = (value) => {
-    setListColumn(initialColumn)
-    onClose({ selectedValue: listColumn })
+    setFieldColumn('name_surname')
+    onClose({ selectedValue: fieldColumn })
+  }
+
+  const handleChangeRadio = (event) => {
+    setFieldColumn(event.target.value)
   }
 
   return (
@@ -103,9 +107,14 @@ export default function ModalAllFields(props) {
       <DialogContent dividers>
         <Box display="flex" flexDirection="column" alignItems="center" m={1}>
           <FormControl component="fieldset">
-            <RadioGroup aria-label="gender" name="gender1">
-              {listColumn &&
-                listColumn.map((list) => {
+            <RadioGroup
+              aria-label="gender"
+              name="gender1"
+              onChange={handleChangeRadio}
+              value={fieldColumn}
+            >
+              {initialColumn &&
+                initialColumn.map((list) => {
                   return (
                     <FormControlLabel
                       value={list}

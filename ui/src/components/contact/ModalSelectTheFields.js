@@ -60,23 +60,11 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions)
 
-const initialColumn = [
-  'name_surname',
-  'mobile_number',
-  'company',
-  'add_date',
-  'edit_date',
-  'email',
-  'industrial',
-  'status',
-  'website',
-  'activity',
-  'telephone',
-]
+const initialColumn = []
 
 export default function ModalSelectTheFields(props) {
-  const { onClose, selectedValue, open } = props
-  const [tagColumn, setTagColumn] = useState(initialColumn)
+  const { onClose, open } = props
+  const [tagColumn, setTagColumn] = useState([])
   const [openModalAllFields, setOpenModalAllFields] = useState(false)
 
   const handleClose = () => {
@@ -84,9 +72,9 @@ export default function ModalSelectTheFields(props) {
     onClose()
   }
 
-  const handleListItemClick = (value) => {
+  const handleSaveColumnClick = (value) => {
     setTagColumn(initialColumn)
-    console.log(selectedValue)
+    console.log('tagColumn : ', tagColumn)
     onClose({ selectedValue: tagColumn })
   }
 
@@ -95,12 +83,24 @@ export default function ModalSelectTheFields(props) {
     setTagColumn(tags)
   }
 
+  // Modal All Fields
   const handleClickOpenModalAllFields = () => {
     setOpenModalAllFields(true)
   }
 
   const handleCloseModalAllFields = (value) => {
+    let result = tagColumn.filter((col) => {
+      return value.selectedValue.includes(col)
+    })
     setOpenModalAllFields(false)
+    if (result.length > 0) {
+      // select radio dulipcate
+      setTagColumn(tagColumn)
+    } else {
+      if (value.selectedValue.length > 0) {
+        setTagColumn([value.selectedValue, ...tagColumn])
+      }
+    }
   }
 
   return (
@@ -129,9 +129,9 @@ export default function ModalSelectTheFields(props) {
                 <Box m={1}>
                   <Tag
                     key={tag}
-                    closable={index !== 0}
                     onClose={() => handleCloseCompTag(tag)}
                     style={{ width: '150px', textAlign: 'center' }}
+                    closable
                   >
                     <span>{tag}</span>
                   </Tag>
@@ -150,7 +150,7 @@ export default function ModalSelectTheFields(props) {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleListItemClick} color="secondary">
+        <Button autoFocus onClick={handleSaveColumnClick} color="secondary">
           Save
         </Button>
         <Button autoFocus onClick={handleClose} color="dark">

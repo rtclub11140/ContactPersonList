@@ -190,6 +190,7 @@ export default function Content() {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = useState(false)
+  const [column, setColumn] = useState([])
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -197,6 +198,10 @@ export default function Content() {
 
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  const getColumnDisplaytable = (value) => {
+    setColumn(value)
   }
 
   return (
@@ -252,9 +257,9 @@ export default function Content() {
       <Main open={open}>
         <DrawerHeader />
         <DrawerHeader />
-        <FilterDataContactPersonList />
+        <FilterDataContactPersonList getColumnDisplay={getColumnDisplaytable} />
         <Box mb={2}></Box>
-        <TableContact />
+        <TableContact column={column} />
         <Box mb={2}></Box>
         <Footer />
       </Main>

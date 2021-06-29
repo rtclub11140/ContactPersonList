@@ -65,12 +65,25 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem)
 
- const initialColumn = ['name_surname', 'mobile_number', 'company', 'add_date', 'edit_date', 'email', 'industrial', 'status', 'website', 'activity', 'telephone']
+const initialColumn = [
+  'name_surname',
+  'mobile_number',
+  'company',
+  'add_date',
+  'edit_date',
+  'email',
+  'industrial',
+  'status',
+  'website',
+  'activity',
+  'telephone',
+]
 
-export default function FilterDataContactPersonList() {  
+export default function FilterDataContactPersonList(props) {
+  const { getColumnDisplay } = props
   const [anchorEl, setAnchorEl] = useState(null)
   const [open, setOpen] = useState(false)
-  const [selectedValue, setSelectedValue] = React.useState(initialColumn);
+  const [selectedValue, setSelectedValue] = React.useState(initialColumn)
   const classes = useStyles()
 
   const handleClick = (event) => {
@@ -82,14 +95,19 @@ export default function FilterDataContactPersonList() {
   }
 
   const handleClickOpenModalSelectTheFields = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleCloseModalSelectTheFields = (value) => {
-   // value มาจาก modal
-    console.log('handleCloseModalSelectTheFields value : ', value);
+    // value มาจาก modal
+    console.log('handleCloseModalSelectTheFields value : ', value)
+    console.log(
+      'handleCloseModalSelectTheFields selectedValue : ',
+      selectedValue
+    )
     setOpen(false)
     setSelectedValue(value)
+    getColumnDisplay(value)
   }
 
   return (
@@ -117,7 +135,7 @@ export default function FilterDataContactPersonList() {
             onClick={handleClick}
           >
             <Edit />
-          </Button>          
+          </Button>
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
@@ -125,7 +143,9 @@ export default function FilterDataContactPersonList() {
             open={Boolean(anchorEl)}
             onClose={handleCloseMenu}
           >
-            <StyledMenuItem onClick={(event) => handleClickOpenModalSelectTheFields(event)}>
+            <StyledMenuItem
+              onClick={(event) => handleClickOpenModalSelectTheFields(event)}
+            >
               <ListItemIcon>
                 <VideoLabelOutlined fontSize="small" />
               </ListItemIcon>
@@ -147,7 +167,10 @@ export default function FilterDataContactPersonList() {
           </StyledMenu>
         </Box>
       </Box>
-      <ModalSelectTheFields selectedValue={selectedValue} open={open} onClose={handleCloseModalSelectTheFields} />
+      <ModalSelectTheFields
+        open={open}
+        onClose={handleCloseModalSelectTheFields}
+      />
     </div>
   )
 }
